@@ -33,9 +33,9 @@ pipeline {
     }
 
     stage('gradle') {
-      agent { docker "golang" }
+      agent { docker "gradle" }
       steps {
-        sh "go version"
+        sh "gradle --version"
       }
     }
 
