@@ -1,10 +1,10 @@
 pipeline {
-  agent none
+  agent  { label 'maven' }
 
   stages {
 
     stage('maven') {
-      agent { docker "maven" }
+      agent { label "maven" }
       steps {
         sh "mvn -version"
         sh "java -version"
@@ -12,28 +12,40 @@ pipeline {
     }
 
     stage('node') {
-      agent { docker "node" }
+      agent { docker {
+        label 'docker-slave'
+        image 'node'
+      } }
       steps {
         sh "node --version"
       }
     }
 
     stage('python') {
-      agent { docker "python" }
+      agent { docker {
+        label 'docker-slave'
+        image 'python'
+      } }
       steps {
         sh "python3 --version"
       }
     }
 
     stage('golang') {
-      agent { docker "golang" }
+      agent { docker {
+        label 'docker-slave'
+        image 'golang'
+      } }
       steps {
         sh "go version"
       }
     }
 
     stage('gradle') {
-      agent { docker "gradle" }
+      agent { docker {
+        label 'docker-slave'
+        image 'gradle'
+      } }
       steps {
         sh "gradle --version"
       }
