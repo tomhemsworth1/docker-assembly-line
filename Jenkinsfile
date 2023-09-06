@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker "maven" }
+  agent { label "maven" }
 
   stages {
     stage('maven') {
